@@ -44,7 +44,7 @@ func main() {
 
 	script := bytes.Split(text, []byte("\n"))
 	if len(script) == 0 {
-		log.Fatal("%q is empty file", os.Args[2])
+		log.Fatalf("%q is empty file", os.Args[2])
 	}
 
 	cmd := exec.Command(os.Args[1])
