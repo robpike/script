@@ -1,3 +1,6 @@
+Script is an interactive driver for a line-at-a-time command language such as
+the shell. It takes no arguments.
+
 It reads each line of the script file, waiting for a newline on
 standard input to proceed. After receiving a newline, it prints the
 next line of of the script and also feeds it to a single running
