@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 // Script is an interactive driver for a line-at-a-time command language such as
-// the shell. It takes no arguments.
+// the shell.
 //
 // It reads each line of the script file, waiting for a newline on standard input
 // to proceed. After receiving a newline, it prints the next line of of the script
@@ -33,21 +33,21 @@ import (
 
 func main() {
 	log.SetFlags(0)
-	if len(os.Args) != 3 {
-		log.Fatal("Usage: script command script-file\n")
+	if len(os.Args) < 3 {
+		log.Fatal("Usage: script script-file command -args...\n")
 	}
 	log.SetPrefix("script: ")
-	text, err := ioutil.ReadFile(os.Args[2])
+	text, err := ioutil.ReadFile(os.Args[1])
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	script := bytes.Split(text, []byte("\n"))
 	if len(script) == 0 {
-		log.Fatalf("%q is empty file", os.Args[2])
+		log.Fatalf("%q is empty file", os.Args[1])
 	}
 
-	cmd := exec.Command(os.Args[1])
+	cmd := exec.Command(os.Args[2], os.Args[3:]...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	input, err := cmd.StdinPipe()
@@ -70,6 +70,7 @@ func main() {
 		} else {
 			// User typed some text. Send that instead.
 			_, err = input.Write(scan.Bytes())
+			input.Write([]byte("\n")) // Error ignored; that's OK.
 		}
 		if err != nil {
 			log.Fatal(err)
