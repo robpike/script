@@ -16,5 +16,5 @@ at a time.
 
 Normally the user types an empty line to proceed, advancing to the
 next line of the script. But a non-empty line is passed to the
-command without advanding the script, allowing the user to inject
+command without advancing the script, allowing the user to inject
 extra commands.
