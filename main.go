@@ -17,7 +17,7 @@
 // more than one line of input at a time.
 //
 // Normally the user types an empty line to proceed, advancing to the next line of
-// the script. But a non-empty line is passed to the command without advanding the
+// the script. But a non-empty line is passed to the command without advancing the
 // script, allowing the user to inject extra commands.
 //
 package main // import "robpike.io/cmd/script"
